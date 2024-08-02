@@ -42,30 +42,42 @@ internal struct LineChartColourSubView<CD, DS>: View where CD: CTLineChartDataPr
     @State private var startAnimation: Bool = false
     
     internal var body: some View {
-        LineShape(dataPoints: dataSet.dataPoints,
-                  lineType: dataSet.style.lineType,
-                  isFilled: isFilled,
-                  minValue: minValue,
-                  range: range,
-                  ignoreZero: dataSet.style.ignoreZero)
-            .ifElse(isFilled, if: {
-                $0
-                    .scale(y: animationValue, anchor: .bottom)
-                    .fill(colour)
-            }, else: {
-                $0
-                    .trim(to: animationValue)
-                    .stroke(colour, style: dataSet.style.strokeStyle.strokeToStrokeStyle())
-            })
-            .background(Color(.gray).opacity(0.000000001))
-            .if(chartData.viewData.hasXAxisLabels) { $0.xAxisBorder(chartData: chartData) }
-            .if(chartData.viewData.hasYAxisLabels) { $0.yAxisBorder(chartData: chartData) }
-            .animateOnAppear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
-                self.startAnimation = true
-            }
-            .animateOnDisappear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
-                self.startAnimation = false
-            }
+        ZStack {
+            LineShape(dataPoints: dataSet.dataPoints,
+                      lineType: dataSet.style.lineType,
+                      isFilled: false,
+                      minValue: minValue,
+                      range: range,
+                      ignoreZero: dataSet.style.ignoreZero)
+                .trim(to: animationValue)
+                .stroke(colour, style: dataSet.style.strokeStyle.strokeToStrokeStyle())
+                .background(Color(.gray).opacity(0.000000001))
+                .if(chartData.viewData.hasXAxisLabels) { $0.xAxisBorder(chartData: chartData) }
+                .if(chartData.viewData.hasYAxisLabels) { $0.yAxisBorder(chartData: chartData) }
+                .animateOnAppear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
+                    self.startAnimation = true
+                }
+                .animateOnDisappear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
+                    self.startAnimation = false
+                }
+            LineShape(dataPoints: dataSet.dataPoints,
+                      lineType: dataSet.style.lineType,
+                      isFilled: true,
+                      minValue: minValue,
+                      range: range,
+                      ignoreZero: dataSet.style.ignoreZero)
+                .scale(y: animationValue, anchor: .bottom)
+                .fill(colour.opacity(0.15))
+                .background(Color(.gray).opacity(0.000000001))
+                .if(chartData.viewData.hasXAxisLabels) { $0.xAxisBorder(chartData: chartData) }
+                .if(chartData.viewData.hasYAxisLabels) { $0.yAxisBorder(chartData: chartData) }
+                .animateOnAppear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
+                    self.startAnimation = true
+                }
+                .animateOnDisappear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
+                    self.startAnimation = false
+                }
+        }
     }
     
     var animationValue: CGFloat {
