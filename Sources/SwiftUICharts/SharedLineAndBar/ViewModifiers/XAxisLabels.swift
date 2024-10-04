@@ -24,7 +24,7 @@ internal struct XAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
             case .bottom:
                 if chartData.isGreaterThanTwo() {
                     VStack {
-                        content
+                        content.layoutPriority(1.0)
                         chartData.getXAxisLabels().padding(.top, 2)
                         chartData.getXAxisTitle()
                     }
