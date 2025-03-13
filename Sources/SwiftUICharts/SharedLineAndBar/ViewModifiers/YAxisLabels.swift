@@ -27,32 +27,29 @@ internal struct YAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
         self.specifier = specifier
         self.colourIndicator = colourIndicator
         self.formatter = formatter
+
+        self.chartData.viewData.yAxisSpecifier = specifier
+        self.chartData.viewData.yAxisNumberFormatter = formatter
     }
     
+    @ViewBuilder
     internal func body(content: Content) -> some View {
-        Group {
-            if chartData.isGreaterThanTwo() {
-                switch chartData.chartStyle.yAxisLabelPosition {
-                case .leading:
-                    HStack(spacing: 0) {
-                        chartData.getYAxisTitle(colour: colourIndicator)
-                        chartData.getYAxisLabels().padding(.trailing, 4)
-                        content
-                    }
-                case .trailing:
-                    HStack(spacing: 0) {
-                        content
-                        chartData.getYAxisLabels().padding(.leading, 4)
-                        chartData.getYAxisTitle(colour: colourIndicator)
-                    }
+        if chartData.isGreaterThanTwo() {
+            switch chartData.chartStyle.yAxisLabelPosition {
+            case .leading:
+                HStack(spacing: 0) {
+                    chartData.getYAxisTitle(colour: colourIndicator)
+                    chartData.getYAxisLabels().padding(.trailing, 4)
+                    content
                 }
-            } else { content }
-        }
-        .onAppear {
-            // chartData.viewData.hasYAxisLabels = true
-            chartData.viewData.yAxisSpecifier = specifier
-            chartData.viewData.yAxisNumberFormatter = formatter
-        }
+            case .trailing:
+                HStack(spacing: 0) {
+                    content
+                    chartData.getYAxisLabels().padding(.leading, 4)
+                    chartData.getYAxisTitle(colour: colourIndicator)
+                }
+            }
+        } else { content }
     }
 }
 
