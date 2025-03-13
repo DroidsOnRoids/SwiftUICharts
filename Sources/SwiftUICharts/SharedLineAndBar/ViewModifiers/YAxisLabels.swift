@@ -49,7 +49,7 @@ internal struct YAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
             } else { content }
         }
         .onAppear {
-            chartData.viewData.hasYAxisLabels = true
+            // chartData.viewData.hasYAxisLabels = true
             chartData.viewData.yAxisSpecifier = specifier
             chartData.viewData.yAxisNumberFormatter = formatter
         }
