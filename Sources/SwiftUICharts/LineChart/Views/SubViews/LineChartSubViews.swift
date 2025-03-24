@@ -67,7 +67,11 @@ internal struct LineChartColourSubView<CD, DS>: View where CD: CTLineChartDataPr
                       range: range,
                       ignoreZero: dataSet.style.ignoreZero)
                 .scale(y: animationValue, anchor: .bottom)
-                .fill(colour.opacity(0.15))
+                .fill(LinearGradient(
+                    colors: [colour.opacity(0.50), .black.opacity(0.0)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ))
                 .background(Color(.gray).opacity(0.000000001))
                 .if(chartData.viewData.hasXAxisLabels) { $0.xAxisBorder(chartData: chartData) }
                 .if(chartData.viewData.hasYAxisLabels) { $0.yAxisBorder(chartData: chartData) }
