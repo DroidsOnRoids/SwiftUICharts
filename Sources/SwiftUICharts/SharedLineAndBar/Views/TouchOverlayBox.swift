@@ -27,7 +27,7 @@ internal struct TouchOverlayBox<T: CTChartData>: View {
     internal var body: some View {
         Group {
             if chartData.chartStyle.infoBoxContentAlignment == .vertical {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 8.0) {
                     VStack(alignment: .leading, spacing: 0.0) {
                         ForEach(chartData.infoView.touchOverlayInfo, id: \.id) { point in
                             // chartData.infoDescription(info: point)
@@ -57,7 +57,7 @@ internal struct TouchOverlayBox<T: CTChartData>: View {
                 }
             }
         }
-        .padding(.all, 8)
+        .padding(8)
         .background(
             GeometryReader { geo in
                 if chartData.infoView.isTouchCurrent {
