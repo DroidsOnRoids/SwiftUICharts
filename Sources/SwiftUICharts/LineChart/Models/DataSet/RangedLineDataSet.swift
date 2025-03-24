@@ -17,6 +17,7 @@ public struct RangedLineDataSet: CTRangedLineChartDataSet, DataFunctionsProtocol
     public let id: UUID = UUID()
     public var dataPoints: [RangedLineChartDataPoint]
     public var legendTitle: String
+    public var legendColour: Color?
     public var legendFillTitle: String
     public var pointStyle: PointStyle
     public var style: RangedLineStyle
@@ -25,18 +26,21 @@ public struct RangedLineDataSet: CTRangedLineChartDataSet, DataFunctionsProtocol
     /// - Parameters:
     ///   - dataPoints: Array of elements.
     ///   - legendTitle: Label for the data in legend.
+    ///   - legendColour: Legend circle color.
     ///   - legendFillTitle: Label for the range data in legend.
     ///   - pointStyle: Styling information for the data point markers.
     ///   - style: Styling for how the line will be draw in.
     public init(
         dataPoints: [RangedLineChartDataPoint],
         legendTitle: String = "",
+        legendColour: Color? = nil,
         legendFillTitle: String = "",
         pointStyle: PointStyle = PointStyle(),
         style: RangedLineStyle = RangedLineStyle()
     ) {
         self.dataPoints = dataPoints
         self.legendTitle = legendTitle
+        self.legendColour = legendColour
         self.legendFillTitle = legendFillTitle
         self.pointStyle = pointStyle
         self.style = style

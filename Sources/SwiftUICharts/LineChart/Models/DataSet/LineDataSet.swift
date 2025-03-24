@@ -17,6 +17,7 @@ public struct LineDataSet: CTLineChartDataSet, DataFunctionsProtocol {
     public let id: UUID = UUID()
     public var dataPoints: [LineChartDataPoint]
     public var legendTitle: String
+    public var legendColour: Color?
     public var pointStyle: PointStyle
     public var style: LineStyle
     
@@ -24,16 +25,19 @@ public struct LineDataSet: CTLineChartDataSet, DataFunctionsProtocol {
     /// - Parameters:
     ///   - dataPoints: Array of elements.
     ///   - legendTitle: Label for the data in legend.
+    ///   - legendColour: Legend circle color.
     ///   - pointStyle: Styling information for the data point markers.
     ///   - style: Styling for how the line will be draw in.
     public init(
         dataPoints: [LineChartDataPoint],
         legendTitle: String = "",
+        legendColour: Color? = nil,
         pointStyle: PointStyle = PointStyle(),
         style: LineStyle = LineStyle()
     ) {
         self.dataPoints = dataPoints
         self.legendTitle = legendTitle
+        self.legendColour = legendColour
         self.pointStyle = pointStyle
         self.style = style
     }
