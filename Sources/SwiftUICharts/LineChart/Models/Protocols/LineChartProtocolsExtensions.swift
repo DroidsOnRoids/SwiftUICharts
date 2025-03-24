@@ -576,9 +576,7 @@ extension CTLineChartDataProtocol {
         {
             self.legends.append(LegendData(id: dataSet.id,
                                            legend: dataSet.legendTitle,
-                                           colour: ColourStyle(colours: colours,
-                                                               startPoint: .leading,
-                                                               endPoint: .trailing),
+                                           colour: ColourStyle(colour: colours[0]),
                                            strokeStyle: dataSet.style.strokeStyle,
                                            prioity: 1,
                                            chartType: .line))

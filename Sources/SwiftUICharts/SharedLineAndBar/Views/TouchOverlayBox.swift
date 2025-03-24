@@ -74,6 +74,5 @@ internal struct TouchOverlayBox<T: CTChartData>: View {
                 }
             }
         )
-        .zIndex(1)
     }
 }
